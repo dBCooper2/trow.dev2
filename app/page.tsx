@@ -12,18 +12,18 @@ export default function Home() {
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
         <div className="container flex flex-col gap-4 text-center">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-balance">
-            Hello, I&apos;m James
+            Trevor Rowland
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            Welcome to my blog template. Built using tailwind, shadcn, velite
-            and Nextjs 14.
+            Welcome to my portfolio. Forked from Jolly Coding's MDX Blog and
+            built using tailwind, shadcn, velite and Nextjs 14.
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
-              href="/blog"
+              href="/articles"
               className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
             >
-              View my blog
+              View Articles
             </Link>
             <Link
               href={siteConfig.links.github}
@@ -31,7 +31,7 @@ export default function Home() {
               rel="noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "w-full sm:w-fit"
+                "w-full sm:w-fit",
               )}
             >
               GitHub
@@ -44,19 +44,23 @@ export default function Home() {
           Latest Posts
         </h2>
         <ul className="flex flex-col">
-          {latestPosts.map((post) => (
-            post.published && (
-              <li key={post.slug} className="first:border-t first:border-border">
-                <PostItem
-                  slug={post.slug}
-                  title={post.title}
-                  description={post.description}
-                  date={post.date}
-                  tags={post.tags}
-                />
-              </li>
-            )
-          ))}
+          {latestPosts.map(
+            (post) =>
+              post.published && (
+                <li
+                  key={post.slug}
+                  className="first:border-t first:border-border"
+                >
+                  <PostItem
+                    slug={post.slug}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    tags={post.tags}
+                  />
+                </li>
+              ),
+          )}
         </ul>
       </section>
     </>

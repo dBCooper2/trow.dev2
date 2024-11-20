@@ -10,6 +10,12 @@ import { ModeToggle } from "./mode-toggle";
 export function SiteHeader() {
   return (
     <header className="z-10 sticky top-0 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
+        crossOrigin="anonymous"
+      />
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <MainNav />
         <div className="flex flex-1 items-center justify-end space-x-2">
@@ -22,7 +28,7 @@ export function SiteHeader() {
               <div
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "w-10 px-0 hidden sm:inline-flex"
+                  "w-10 px-0 hidden sm:inline-flex",
                 )}
               >
                 <Icons.gitHub className="h-4 w-4" />
@@ -37,7 +43,7 @@ export function SiteHeader() {
               <div
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "w-10 px-0 hidden sm:inline-flex"
+                  "w-10 px-0 hidden sm:inline-flex",
                 )}
               >
                 <Icons.twitter className="h-4 w-4" />

@@ -3,6 +3,10 @@ import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
+//LaTeX Rendering
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+
 const computedFields = <T extends { slug: string }>(data: T) => ({
   ...data,
   slugAsParams: data.slug.split("/").slice(1).join("/"),
@@ -10,7 +14,7 @@ const computedFields = <T extends { slug: string }>(data: T) => ({
 
 const posts = defineCollection({
   name: "Post",
-  pattern: "blog/**/*.mdx",
+  pattern: "articles/**/*.mdx",
   schema: s
     .object({
       slug: s.path(),
@@ -48,7 +52,8 @@ export default defineConfig({
           },
         },
       ],
+      rehypeKatex,
     ],
-    remarkPlugins: [],
+    remarkPlugins: [remarkMath],
   },
 });
