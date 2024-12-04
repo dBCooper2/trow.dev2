@@ -28,6 +28,21 @@ const posts = defineCollection({
     .transform(computedFields),
 });
 
+export const projects = defineCollection({
+  name: "Project",
+  pattern: "projects/**/*.mdx", // You can define projects directly in a TypeScript file
+  schema: s.object({
+    slug: s.path(),
+    title: s.string().max(99),
+    description: s.string().max(999).optional(),
+    date: s.isodate(),
+    published: s.boolean().default(true),
+    tags: s.array(s.string()).optional(),
+    githubLink: s.string().url().optional(),
+    demoLink: s.string().url().optional(),
+  }),
+});
+
 export default defineConfig({
   root: "content",
   output: {

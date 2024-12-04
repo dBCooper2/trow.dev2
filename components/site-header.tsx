@@ -36,7 +36,7 @@ export function SiteHeader() {
               </div>
             </Link>
             <Link
-              href={siteConfig.links.twitter}
+              href={siteConfig.links.instagram}
               target="_blank"
               rel="noreferrer"
             >
@@ -46,8 +46,23 @@ export function SiteHeader() {
                   "w-10 px-0 hidden sm:inline-flex",
                 )}
               >
-                <Icons.twitter className="h-4 w-4" />
-                <span className="sr-only">Twitter</span>
+                <Icons.instagram className="h-4 w-4" />
+                <span className="sr-only">Instagram</span>
+              </div>
+            </Link>
+            <Link
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "w-10 px-0 hidden sm:inline-flex",
+                )}
+              >
+                <Icons.linkedin className="h-4 w-4" />
+                <span className="sr-only">Instagram</span>
               </div>
             </Link>
             <ModeToggle />

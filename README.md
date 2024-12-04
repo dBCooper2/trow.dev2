@@ -1,3 +1,8 @@
+## Resources Used:
+
+- The Site Repo
+- Social Media Icons for the Headers ([Link](<https://gist.github.com/bogdanvarlamov/58769c7f55d52ca75cd7b2d0bc4f765a>)
+
 ## NextJS 14, Tailwind, Shadcn UI, MDX and Velite Blog Template
 
 <p align="center">
