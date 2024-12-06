@@ -1,8 +1,9 @@
-import { posts } from "#site/content";
+import { posts, projects } from "#site/content";
 import { PostItem } from "@/components/post-item";
+import { ProjectItem } from "@/components/project-item";
 import { Tag } from "@/components/tag";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/utils";
+import { getAllTags, getPostsByTagSlug, getProjectsByTagSlug, sortTagsByCount } from "@/lib/utils";
 import { slug } from "github-slugger";
 import { Metadata } from "next";
 
@@ -23,7 +24,7 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = () => {
-  const tags = getAllTags(posts);
+  const tags = getAllTags(posts, projects);
   const paths = Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
   return paths;
 };
@@ -34,7 +35,11 @@ export default function TagPage({ params }: TagPageProps) {
 
   const allPosts = getPostsByTagSlug(posts, tag);
   const displayPosts = allPosts.filter(post => post.published);
-  const tags = getAllTags(posts);
+
+  const allProjects = getProjectsByTagSlug(projects, tag);
+  const displayProjects = allProjects.filter(project => project.published);
+
+  const tags = getAllTags(posts, projects);
   const sortedTags = sortTagsByCount(tags);
 
   return (
@@ -42,7 +47,7 @@ export default function TagPage({ params }: TagPageProps) {
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
           <h1 className="inline-block font-black text-4xl lg:text-5xl capitalize">
-            {title}
+            Articles with :: {title}
           </h1>
         </div>
       </div>
@@ -70,9 +75,38 @@ export default function TagPage({ params }: TagPageProps) {
             <p>Nothing to see here yet</p>
           )}
         </div>
+        <div>
+          <h1>
+            Projects with :: {title}
+          </h1>
+          <div className="col-span-12 col-start-1 sm:col-span-8">
+          <hr />
+          {displayProjects?.length > 0 ? (
+            <ul className="flex flex-col">
+              {displayProjects.map((project) => {
+                const { slug, date, title, description, tags } = project;
+                return (
+                  <li key={slug}>
+                    <ProjectItem
+                      slug={slug}
+                      date={date}
+                      title={title}
+                      description={description}
+                      tags={tags}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p>Nothing to see here yet</p>
+          )}
+        </div>
+        </div>
+        
         <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
           <CardHeader>
-            <CardTitle>Tags</CardTitle>
+            <CardTitle>All Tags</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {sortedTags?.map((t) => (

@@ -11,19 +11,20 @@ export function SiteFooter() {
             <span className="sr-only">Mail</span>
             <Mail className="h-6 w-6" />
           </a>
-          <a target="_blank" rel="noreferrer" href={siteConfig.links.twitter}>
-            <span className="sr-only">Twitter</span>
-            <Icons.twitter className="h-6 w-6" />
+          <a target="_blank" rel="noreferrer" href={siteConfig.links.instagram}>
+            <span className="sr-only">instagram</span>
+            <Icons.instagram className="h-6 w-6" />
           </a>
           <a target="_blank" rel="noreferrer" href={siteConfig.links.github}>
             <span className="sr-only">GitHub</span>
-            <Icons.gitHub className="h-6 w-6" />
+            <Icons.github className="h-6 w-6" />
+          </a>
+          <a target="_blank" rel="noreferrer" href={siteConfig.links.linkedin}>
+            <span className="sr-only">LinkedIn</span>
+            <Icons.linkedin className="h-6 w-6" />
           </a>
         </div>
         <div className="mb-2 flex space-x-2 text-sm text-muted-foreground">
-          <a href={siteConfig.links.personalSite} target="_blank">
-            {siteConfig.author}
-          </a>
         </div>
       </div>
     </footer>

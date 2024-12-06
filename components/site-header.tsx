@@ -31,7 +31,7 @@ export function SiteHeader() {
                   "w-10 px-0 hidden sm:inline-flex",
                 )}
               >
-                <Icons.gitHub className="h-4 w-4" />
+                <Icons.github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>

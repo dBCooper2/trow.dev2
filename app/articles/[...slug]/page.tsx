@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import "@/styles/mdx.css";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import { Tag } from "@/components/tag";
+import { PostTag } from "@/components/post-tag";
+
 interface PostPageProps {
   params: {
     slug: string[];
@@ -76,7 +77,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <h1 className="mb-2">{post.title}</h1>
       <div className="flex gap-2 mb-2">
         {post.tags?.map((tag) => (
-          <Tag tag={tag} key={tag} />
+          <PostTag tag={tag} key={tag} />
         ))}
       </div>
       {post.description ? (

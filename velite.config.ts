@@ -28,19 +28,20 @@ const posts = defineCollection({
     .transform(computedFields),
 });
 
-export const projects = defineCollection({
+const projects = defineCollection({
   name: "Project",
-  pattern: "projects/**/*.mdx", // You can define projects directly in a TypeScript file
+  pattern: "projects/**/*.mdx",
   schema: s.object({
-    slug: s.path(),
-    title: s.string().max(99),
-    description: s.string().max(999).optional(),
-    date: s.isodate(),
-    published: s.boolean().default(true),
-    tags: s.array(s.string()).optional(),
-    githubLink: s.string().url().optional(),
-    demoLink: s.string().url().optional(),
-  }),
+      slug: s.path(),
+      title: s.string().max(99),
+      description: s.string().max(999).optional(),
+      date: s.isodate(),
+      published: s.boolean().default(true),
+      tags: s.array(s.string()).optional(),
+      githubLink: s.string().optional(),
+      demoLink: s.string().optional(),
+      body: s.mdx(),
+  }).transform(computedFields),
 });
 
 export default defineConfig({
@@ -52,7 +53,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { posts },
+  collections: { posts, projects },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

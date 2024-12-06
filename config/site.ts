@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "JollyBlog",
-  url: "https://example.com",
+  name: "trow.dev",
+  url: "https://trow.dev",
   description: "Nextjs 14 blog using velite, tailwind and shadcn",
-  author: "JollyCoding",
+  author: "Trevor Rowland",
+  title: "Data Analyst",
   links: {
     github: "https://github.com/dBCooper2",
-    personalSite: "https://google.com",
     instagram: "https://instagram.com/trevor_r0",
     linkedin: "https://www.linkedin.com/in/trevor-rowland711/",
   },
