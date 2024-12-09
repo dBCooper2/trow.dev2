@@ -15,7 +15,7 @@ export default function Home() {
             Trevor Rowland
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            This is my portfolio
+            Data Analysis, Business Intelligence, Machine Learning
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
@@ -23,6 +23,12 @@ export default function Home() {
               className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
             >
               View Articles
+            </Link>
+            <Link
+              href="/projects"
+              className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
+            >
+              View Projects
             </Link>
             <Link
               href={siteConfig.links.github}
@@ -34,6 +40,26 @@ export default function Home() {
               )}
             >
               GitHub
+            </Link>
+            <Link
+              href="/contact"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "w-full sm:w-fit",
+              )}
+            >
+              Contact
+            </Link>
+            <Link
+              href="/about"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "w-full sm:w-fit",
+              )}
+            >
+              Resume
             </Link>
           </div>
         </div>
