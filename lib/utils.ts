@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Post } from "#site/content";
-import { Project } from "#site/content";
+import { Post, Project, Resume } from "#site/content";
 import { slug } from "github-slugger";
 
 export function cn(...inputs: ClassValue[]) {
@@ -15,6 +14,21 @@ export function formatDate(input: string | number): string {
     day: "numeric",
     year: "numeric",
   });
+}
+
+export function sortResumeByDate(resumes: Array<Resume>) {
+  return resumes.sort((a, b) => {
+    if (a.date > b.date) return -1;
+    if (a.date < b.date) return 1;
+    return 0;
+  });
+}
+
+export function getMostRecentResume(resumes: Array<Resume>) {
+  //console.log("Resumes:", resumes);
+  const sortedResumes = sortResumeByDate(resumes);
+  //console.log("Most Recent Resume:", sortedResumes[0] || null);
+  return sortedResumes[0] || null;
 }
 
 export function sortPosts(posts: Array<Post>) {

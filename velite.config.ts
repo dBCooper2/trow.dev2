@@ -31,7 +31,8 @@ const posts = defineCollection({
 const projects = defineCollection({
   name: "Project",
   pattern: "projects/**/*.mdx",
-  schema: s.object({
+  schema: s
+    .object({
       slug: s.path(),
       title: s.string().max(99),
       description: s.string().max(999).optional(),
@@ -41,19 +42,19 @@ const projects = defineCollection({
       githubLink: s.string().optional(),
       demoLink: s.string().optional(),
       body: s.mdx(),
-  }).transform(computedFields),
+    })
+    .transform(computedFields),
 });
 
-const resume = defineCollection({
+const resumes = defineCollection({
   name: "Resume",
-  pattern: "resume/**/*.{mdx, md}",
+  pattern: "resumes/**/*.{mdx, md}",
   schema: s.object({
-    slug: s.path(),
     title: s.string().max(99),
-    description: s.string().max(999).optional(),
+    date: s.isodate(),
     published: s.boolean().default(true),
     body: s.mdx(),
-  }).transform(computedFields)
+  }),
 });
 
 export default defineConfig({
@@ -65,7 +66,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { posts, projects, resume },
+  collections: { posts, projects, resumes },
   mdx: {
     rehypePlugins: [
       rehypeSlug,
