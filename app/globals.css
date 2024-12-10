@@ -19,8 +19,8 @@
         --secondary: 160 35% 20%; /* Deeper green */
         --secondary-foreground: 42 87% 96%;
 
-        --muted: 160 35% 20%; /* Muted green */
-        --muted-foreground: 160 15% 70%;
+        --muted: 160 35% 10%; /* Muted green */
+        --muted-foreground: 160 15% 5%;
 
         --accent: 160 40% 25%; /* Dark green accent */
         --accent-foreground: 42 87% 96%;
@@ -51,8 +51,8 @@
         --secondary: 160 35% 20%; /* Deeper green */
         --secondary-foreground: 0 0% 100%;
 
-        --muted: 160 35% 20%; /* Muted green */
-        --muted-foreground: 160 15% 70%;
+        --muted: 160 35% 45%; /* Muted green */
+        --muted-foreground: 160 15% 85%;
 
         --accent: 160 40% 25%; /* Green accent */
         --accent-foreground: 0 0% 100%;
