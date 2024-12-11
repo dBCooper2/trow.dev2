@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/config/site";
+import { Icons } from "@/components/icons";
 
 export const runtime = "edge";
 
@@ -24,21 +25,9 @@ export async function GET(req: NextRequest) {
 
     return new ImageResponse(
       (
-        <div tw="flex relative flex-col p-12 w-full h-full items-start text-black bg-white">
+        <div tw="flex relative flex-col p-12 w-full h-full items-start text-black bg-background">
           <div tw="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M4 11a9 9 0 0 1 9 9" />
-              <path d="M4 4a16 16 0 0 1 16 16" />
-              <circle cx="5" cy="19" r="1" />
-            </svg>
+            <Icons.logo className="mr-2 h-4 w-4" />
             <p tw="ml-2 font-bold text-2xl">{siteConfig.name}</p>
           </div>
           <div tw="flex flex-col flex-1 py-10">
