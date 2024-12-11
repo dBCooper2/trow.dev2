@@ -6,15 +6,15 @@ tags: ["tutorial", "mdx"]
 published: true
 ---
 
-The goal of this site is to share my work and create a portfolio, however I also want to make this available to others to use as a portfolio too. At ISU and TTU, I had to create two eportfolios, and my professors were all adamant about the importance of a site to market yourself. After a year of developing websites and trying to find a Goldilocks-type site for myself, I am happy with how this one turned out and think anyone looking to start publishing their work would find this site useful as well. 
+The goal of this site is to share my work and create a portfolio, however I also want to make this available to others to use as a portfolio too. At ISU and TTU, I had to create two eportfolios, and my professors were all adamant about the importance of a site to market yourself. After a year of developing websites and trying to find a Goldilocks-type site for myself, I am happy with how this one turned out and think anyone looking to start publishing their work would find this site useful as well.
 
-After going through a journey of first forking [Kostas Georgiou's Portfolio](<https://www.gkos.dev>) and creating [a version for myself](<https://dbcooper.vercel.app>), then creating [my own](<https://trevor-rowland.vercel.app>) site using typescript, I have finally found a version that I think fits all of my needs, thanks to [MDX](<https://mdxjs.com/>) and [Jolly Coding's](<https://www.youtube.com/@JollyCoding>) implementation of it to create a blog.
+After going through a journey of first forking [Kostas Georgiou's Portfolio](https://www.gkos.dev) and creating [a version for myself](https://dbcooper.vercel.app), then creating [my own](https://trevor-rowland.vercel.app) site using typescript, I have finally found a version that I think fits all of my needs, thanks to [MDX](https://mdxjs.com/) and [Jolly Coding's](https://www.youtube.com/@JollyCoding) implementation of it to create a blog.
 
-This website is itself a fork of Jolly Coding's [NextJS 14 Blog](<https://github.com/jolbol1/nextjs-velite-blog-template>) (a tutorial to make it yourself can be found [here](<https://www.youtube.com/watch?v=tSI98g3PDyE&t=5062s>)). It should be trivial to copy this repo and make it your own using MDX and a few simple config files.
+This website is itself a fork of Jolly Coding's [NextJS 14 Blog](https://github.com/jolbol1/nextjs-velite-blog-template) (a tutorial to make it yourself can be found [here](https://www.youtube.com/watch?v=tSI98g3PDyE&t=5062s)). It should be trivial to copy this repo and make it your own using MDX and a few simple config files.
 
 ## Step 1: Creating your Git Repo
 
-You can navigate to the github repository for the site [here](<AddLinkHere>). From there, fork the site to create a repository for yourself, then clone it to your local machine. Next, you will need to reinstall the `node_modules` folder and set up the development environment. This can be done by running:
+You can navigate to the github repository for the site [here](https://github.com/dBCooper2/trow.dev2). From there, fork the site to create a repository for yourself, then clone it to your local machine. Next, you will need to reinstall the `node_modules` folder and set up the development environment. This can be done by running:
 
 ```bash
 npm i
@@ -176,7 +176,7 @@ First, we will change the color theming of the website. I am not great at coming
 
 #### Logo
 
-If you navigate back to the homepage (`localhost:3000`), you should see a 'dB' icon in the top left corner. This is an icon that I made into an SVG, and added to the project. To change this, take a PNG file you'd like to use as the logo for the site, and convert it into an SVG tag [here](<https://svg2jsx.com/>). This SVG tag will be used in the file `components/icons.tsx`. Simply replace the following section with your generated code:
+If you navigate back to the homepage (`localhost:3000`), you should see a 'dB' icon in the top left corner. This is an icon that I made into an SVG, and added to the project. To change this, take a PNG file you'd like to use as the logo for the site, and convert it into an SVG tag [here](https://svg2jsx.com/). This SVG tag will be used in the file `components/icons.tsx`. Simply replace the following section with your generated code:
 
 ```typescript
 export const Icons = {
@@ -199,7 +199,7 @@ Make sure you are only replacing the `<svg>` tag and not the `logo: (props: Icon
 
 #### Favicon
 
-The Favicon is an image that sits in the tab your website is in within the browser. You should see another "dB" logo in the tab your `localhost:3000` instance is running in. To create a favicon, find an image you want to use and go to [Favicon.io](<https://favicon.io/>) and follow the steps there. To add the code they want you to paste into the site's head, paste it into `components/site-header.tsx`. Also replace all the icons and favicons in the `app/` directory with the ones from Favicon.io.
+The Favicon is an image that sits in the tab your website is in within the browser. You should see another "dB" logo in the tab your `localhost:3000` instance is running in. To create a favicon, find an image you want to use and go to [Favicon.io](https://favicon.io/) and follow the steps there. To add the code they want you to paste into the site's head, paste it into `components/site-header.tsx`. Also replace all the icons and favicons in the `app/` directory with the ones from Favicon.io.
 
 If you are happy with the site at this point, skip to the Deployment section to learn how to publish the site. Otherwise, the next section will briefly cover further customization.
 
@@ -219,6 +219,18 @@ Next, go to `components/main-nav.tsx` and remove the link to Projects or Article
 
 ## Step 7: Deployment
 
-Let's make sure the site is ready to go before deploying it. If you run the code `npm run build` and it builds with no errors, you are good to go! Otherwise, follow the error messages you provided, something got messed up along the way.
+Let's make sure the site is ready to go before deploying it. If you run the code `npm run build` and it builds with no errors, you are good to go! Otherwise, follow the error messages you provided, something got messed up along the way. Once the build is working, push your changes to github.
 
-For the deployment, I will be using Vercel.
+For the deployment, I will be using [Vercel](https://vercel.com). Navigate to their website and create an account if you do not have one. All you'll need is a hobby account so don't pay for anything.
+
+Next, you should find a page called 'Overview' for your account. Go to `Add New…` and select Project. From here, sign into your github and give Vercel access to the website's repository. Then follow the steps to deploy the website, and you're all set!
+
+### Domains
+
+Vercel will give you a free domain to use, however I purchased my own, [trow.dev](https://trow.dev) through CloudFlare. You can also purchase a domain through vercel, but if you use cloudflare, follow [this guide](https://gist.github.com/nivethan-me/a56f18b3ffbad04bf5f35085972ceb4d) to get set up with it.
+
+And now you should be done! Feel free to reach out with comments or criticism of the project, I want this to be a site that I can continually improve.
+
+## Resources
+
+*I am going to compile this and add it later I'm a lil sleepy rn…*
