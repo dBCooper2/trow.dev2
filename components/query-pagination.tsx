@@ -64,4 +64,4 @@ export function QueryPagination({
       </PaginationContent>
     </Pagination>
   );
-}())toString(.SearchParamsuse URLnew
+}
