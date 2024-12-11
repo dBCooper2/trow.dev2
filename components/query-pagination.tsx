@@ -1,5 +1,4 @@
 "use client";
-
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   Pagination,
@@ -21,14 +20,15 @@ export function QueryPagination({
 }: QueryPaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
   const currentPage = Number(searchParams.get("page")) || 1;
-
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
 
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
+    // Convert ReadonlyURLSearchParams to a new URLSearchParams instance
+    const params = new URLSearchParams(
+      searchParams as unknown as URLSearchParams,
+    );
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
@@ -41,7 +41,6 @@ export function QueryPagination({
             <PaginationPrevious href={createPageURL(prevPage)} />
           </PaginationItem>
         ) : null}
-
         {Array(totalPages)
           .fill("")
           .map((_, index) => (
@@ -57,7 +56,6 @@ export function QueryPagination({
               </PaginationLink>
             </PaginationItem>
           ))}
-
         {nextPage <= totalPages ? (
           <PaginationItem>
             <PaginationNext href={createPageURL(nextPage)} />
@@ -66,4 +64,4 @@ export function QueryPagination({
       </PaginationContent>
     </Pagination>
   );
-}
+}())toString(.SearchParamsuse URLnew

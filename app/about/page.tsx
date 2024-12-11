@@ -42,12 +42,12 @@ export default async function AboutPage() {
               {siteConfig.author}
             </h2>
             <p className="text-muted-foreground text-center break-words">
-              Data Analysis, Business Intelligence
+              {siteConfig.description}
             </p>
           </div>
           <div className="flex-1 w-full h-[800px]">
             <iframe
-              src="/resume_2024_trevor-rowland.pdf"
+              src={myResume}
               width="100%"
               height="100%"
               className="border-none"
@@ -78,7 +78,7 @@ export default async function AboutPage() {
             {siteConfig.author}
           </h2>
           <p className="text-muted-foreground text-center break-words">
-            Data Analysis, Business Intelligence
+            {siteConfig.description}
           </p>
         </div>
         <div className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">

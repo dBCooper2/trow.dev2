@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "trow.dev",
   url: "https://trow.dev",
-  description: "Nextjs 14 blog using velite, tailwind and shadcn",
+  description: "Data Analysis, Business Intelligence, Machine Learning",
   author: "Trevor Rowland",
   title: "Data Analyst",
   links: {

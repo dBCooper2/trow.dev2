@@ -6,25 +6,219 @@ tags: ["tutorial", "mdx"]
 published: true
 ---
 
-The goal of this site is not just to share my work and create a portfolio for myself, but also to be as close to a no-code website editor as possible. At Tennessee Tech University, the Business Department was very focused on having students create an E-Portfolio to share their work. While I like the no-code editors fine enough, particularly Wordpress and Wix, I was left unsatisfied.
+The goal of this site is to share my work and create a portfolio, however I also want to make this available to others to use as a portfolio too. At ISU and TTU, I had to create two eportfolios, and my professors were all adamant about the importance of a site to market yourself. After a year of developing websites and trying to find a Goldilocks-type site for myself, I am happy with how this one turned out and think anyone looking to start publishing their work would find this site useful as well. 
 
-After going through a journey of first forking [Kostas Georgiou's Portfolio](<https://www.gkos.dev>) and creating [a version for myself](<https://dbcooper.vercel.app>), then creating [my own](<https://trevor-rowland.vercel.app>) site using typescript, I have finally found a version that I think fits all of my needs, thanks to [MDX](<https://mdxjs.com/>) and [Jolly Coding](<https://www.youtube.com/@JollyCoding>).
+After going through a journey of first forking [Kostas Georgiou's Portfolio](<https://www.gkos.dev>) and creating [a version for myself](<https://dbcooper.vercel.app>), then creating [my own](<https://trevor-rowland.vercel.app>) site using typescript, I have finally found a version that I think fits all of my needs, thanks to [MDX](<https://mdxjs.com/>) and [Jolly Coding's](<https://www.youtube.com/@JollyCoding>) implementation of it to create a blog.
 
-This website is itself a fork of Jolly Coding's [NextJS 14 Blog](<https://github.com/jolbol1/nextjs-velite-blog-template>) (a tutorial to make it yourself can be found [here](<https://www.youtube.com/watch?v=tSI98g3PDyE&t=5062s>)). Using MDX and a few simple config files, it should be trivial to copy this repo and make it your own!
+This website is itself a fork of Jolly Coding's [NextJS 14 Blog](<https://github.com/jolbol1/nextjs-velite-blog-template>) (a tutorial to make it yourself can be found [here](<https://www.youtube.com/watch?v=tSI98g3PDyE&t=5062s>)). It should be trivial to copy this repo and make it your own using MDX and a few simple config files.
 
-# TODOS:
+## Step 1: Creating your Git Repo
 
-- Rewrite Intro
-- Adding Articles and Projects
-- Explain About Me (MDX Rendering with a PDF Fallback)
-- Changing CSS
-- Embedding content into MDX
-- Adding your own details to the site
+You can navigate to the github repository for the site [here](<AddLinkHere>). From there, fork the site to create a repository for yourself, then clone it to your local machine. Next, you will need to reinstall the `node_modules` folder and set up the development environment. This can be done by running:
 
-# MY TODOS:
+```bash
+npm i
+npm run dev
+```
 
-- Change colors
-- Add Your Articles and Projects
-- Add Resume to About-Me section
-- Write README
-- Fix SVGs
+This should install the necessary node packages to get the site running, and get a working copy of the site running at `localhost:3000`. Now we can get started editing the site.
+
+## Step 2: Customizing the Homepage
+
+Currently, the homepage is tailored to my needs, and is displaying my name instead of yours. To edit this, navigate to the file `config/site.ts`. In here, you will see the following text:
+
+```typescript
+export const siteConfig = {
+  name: "site-name",
+  url: "https://site.url",
+  description: "Describe your site/yourself here",
+  author: "Your Name",
+  title: "Your Job/Title",
+  links: {
+    email: "mailto:your-email@here",
+    github: "https://github.com/add-your-github",
+    instagram: "https://add-your-instagram",
+    linkedin: "https://www.linkedin.com/in/add-your-linkedin-here/",
+  },
+};
+
+export type SiteConfig = typeof siteConfig;
+```
+
+Edit this to contain your information instead of my own. If you want to add links to any other sites, simply add them with the same `key: "https://link-to-site.com"` pattern. This will allow you to reference these links, names and descriptions anywhere else in the site.
+
+## Step 3: Adding MDX Content
+
+On the homepage, you can see a section titled "Latest Articles", with some snapshots of the articles I have on the site. This is done by taking MDX metadata and loading it into a component, and the MDX metadata is taken from files in the `/content` sub-directories. If you are interested in seeing how this works or want to change the directories, check out the file `velite.config.ts`, which sets up the directories as collections of MDX files to be used in the site.
+
+I wish that this project would let me just drop notes from Obsidian in, but this is the best solution I have found. It is pretty simple to get the files set up, all we need to do is add the metadata to each article before adding them to the folder.
+
+Take your Markdown files, and add the following to the first lines of the file depending on what folder it will go into:
+
+### Article Formatting
+
+```markdown
+---
+title: Add Your Title Here
+description: Add a quick description here (This is optional!)
+date: 2024-01-01 (Follow this format!)
+tags: ["add", "topics", "that", "identify", "your", "article"]
+published: true (This is true by default, and is also optional)
+---
+```
+
+### Project Formatting
+
+```markdown
+---
+title: Add Your Title Here
+description: Add a quick description here (This is optional!)
+date: 2024-01-01 (Follow this format!)
+tags: ["add", "topics", "that", "identify", "your", "article"]
+published: true (This is true by default, and is also optional)
+githubLink: https://link-to-github-or-repo-page-here.com (Optional)
+demoLink: https://link-to-demo-here.com (Optional)
+---
+```
+
+I chose to make a separate page for projects that catalogue projects I have gotten to a point where I can run a demo of them. If you do not want this and just want articles instead, just leave this folder empty, and delete the projects from the site header (we will cover this later).
+
+### Resume Formatting
+
+```markdown
+---
+title: Resume
+date: 2024-12-9
+published: true
+---
+```
+
+The Resume Section is a way for me to display my resume in a better way than the simple embed I used to use. You can follow the formatting of the included resume.mdx file to do the same. Also, if you wish to keep multiple copies of your resume, know that the site will display the resume with the **most recent date** in the metadata.
+
+**Also, if you are moving markdown files into the repository, make sure to change their filenames to have the .mdx extension!**
+
+### Some Other Notes About MDX Posts
+
+Currently the site supports code blocks, LaTeX and youtube video embeds. There is a component that you can add into your MDX files like this:
+
+```mdx
+from components/yt-embed.tsx:
+
+<YouTubeEmbed url="https://www.youtube.com/watch?v=P1XGFXdjb-Q"/>
+```
+
+<YouTubeEmbed url="https://www.youtube.com/watch?v=P1XGFXdjb-Q"/>
+
+###### This is a video from one of my favorite SSBM players, bab activated
+
+If you wish to add other Typescript or Javascript components, add them to components folder, and in `components/mdx-components.tsx`, add the component name to the following list:
+
+```typescript
+const components = {
+  Image,
+  Callout,
+  YouTubeEmbed,
+  InstagramEmbed
+};
+```
+
+Also do not use the `InstagramEmbed`, it won't work no matter how much I change it.
+
+Now that we have added some MDX files, navigate to `localhost:3000/articles`, `localhost:3000/projects`, and `localhost:3000/about`. You should see any articles or projects you have added, and should be able to click on the cards displaying the metadata to see the full article/project. Additionally, in the About section you should see your resume in the page. Stay on this page, we will be editing it in the next section.
+
+## Step 4: About You
+
+Navigate to `app/about/page.tsx`. This file contains the code used to create the about page. Here we will be adding our actual Resume as a PDF to use as a fallback in case the MDX does not render, and we can customize the about page here as well.
+
+First, add your resume to the folder `/public`. This will let you display your resume as a PDF in the site if the MDX fails for any reason. Next, in the `page.tsx` file, find the line:
+
+```typescript
+other imports...
+import { notFound } from "next/navigation";
+import Image from "next/image";
+
+const myResume = "./resume_2024_trevor-rowland.pdf";
+
+import "@/styles/mdx.css";
+rest of the file...
+```
+
+Make sure that the name of your resume's filename for the variable `myResume` matches the one found here. This lets the app use the PDF as a fallback. Additionally, there is a download button for the resume at the end of the file:
+
+```typescript
+<h3>
+  <a href={myResume} download="resume-trevor-rowland.pdf">
+    Download
+  </a>
+</h3>
+```
+
+Change the string in `download=...` to contain your name. This will be the resume's filename that a viewer of the site will see when they download the file.
+
+Finally, we need to add a photo! Once you have a profile image you like, add it to the `/public` where you added your resume and name it `avatar.png`. Then when you refresh the page in your browser, you should see the profile picture on the website. If you need a different filename, just navigate to this section and change it:
+
+```typescript
+<Avatar className="h-48 w-48">
+  <AvatarImage src="/avatar.png" alt={siteConfig.author} />
+  <AvatarFallback>dB</AvatarFallback>
+</Avatar>
+```
+
+Here you can also change the fallback option if the image cannot be loaded. Here I have "dB", but you can choose your initials, your name, anything that would describe who you are. Now the about page is finished! Let's move onto the finishing touches, adding custom colors and logos.
+
+## Step 5: CSS Changes and Logos
+
+### Color Changes
+
+First, we will change the color theming of the website. I am not great at coming up with palettes, so to make this site's palette I pasted the `globals.css` file into ChatGPT and asked it to change the colors to the themes I wanted. I then pasted the new `globals.css` code into the file, and manually adjusted it until it looked how I wanted. The `globals.css` file has a light and dark theme, so keep that in mind when you are picking the colors for your site.
+
+### Custom Logos and Favicon
+
+#### Logo
+
+If you navigate back to the homepage (`localhost:3000`), you should see a 'dB' icon in the top left corner. This is an icon that I made into an SVG, and added to the project. To change this, take a PNG file you'd like to use as the logo for the site, and convert it into an SVG tag [here](<https://svg2jsx.com/>). This SVG tag will be used in the file `components/icons.tsx`. Simply replace the following section with your generated code:
+
+```typescript
+export const Icons = {
+  logo: (props: IconProps) => (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="682.667"
+      height="682.667"
+      version="1"
+      viewBox="0 0 512 512"
+      fill="currentColor"
+    >
+      <path d="M173.6 143.2c-1.2 4.7-1.2 4.7 12.5 5 11.3.3 13.3.6 14.3 2 .8 1.4-1.3 11.3-9.8 45.5-13.2 53-12.5 50.3-13.6 50.3-.4 0-1.2-1.5-1.5-3.3-1.9-8.7-9.7-18.2-17.7-21.7-7.2-3.1-20.3-2.5-29.6 1.3-13.3 5.5-28.9 18.6-38.9 32.8-9.4 13.3-17.8 34.3-20.4 51.3-1.6 9.9-.6 27.5 2 35.7 8.1 25.7 32 36.6 55.1 25.3 5.9-2.9 9.6-5.8 17.3-13.5 6-6.1 9.7-9.2 9.7-8.1 0 .9-1.1 6-2.5 11.2s-2.5 9.8-2.5 10.2c0 .5 10.3.8 23 .8h22.9l.9-3.3.8-3.2-9.5-.5c-5.3-.3-10.2-.9-10.8-1.3-.7-.5-1.3-2.1-1.3-3.8 0-2.2 49.6-203.3 52.6-213.2.5-1.6-1.2-1.7-25.9-1.7h-26.5zm-15 87.4c9 5.1 14.2 19.1 13.1 34.8-.3 4.7-3 17.7-6.2 30.6-6.6 26.3-11.6 38.1-21.2 49.4-6.5 7.8-16.2 15-22.6 16.7-5.9 1.6-15.1.7-18.5-1.8-3.6-2.7-6.9-7.7-8.4-12.7-2.1-7.1-1.4-26.5 1.6-40.7 7.7-37.6 21.4-65.8 36.3-75 8.5-5.3 18.3-5.8 25.9-1.3M280.1 144.7c-.6 2.1-1.1 4.1-1.1 4.5 0 .5 4.7.8 10.4.8 12.8 0 16.3.7 18.2 3.5 1.3 2-.6 10.4-23.1 100.6-23.5 94-24.7 98.5-27.5 101.1-3 2.8-3.2 2.8-16.5 2.8h-13.4l-1 3.7c-.6 2.1-1.1 4.4-1.1 5 0 2 112.2 1.8 124.5-.2 37-6 64.1-28 72.6-59 5.8-21.3-2.4-41.1-21.2-51-3.8-2-9.7-4.2-13-4.9-3.3-.6-5.9-1.6-5.9-2.1.1-.6 2.9-1.8 6.2-2.7 14-3.9 28.6-12.8 38.9-23.5 11.4-11.9 17.1-24.7 17.2-38.8.1-11.6-2.7-18.1-11.2-26.5-7.6-7.6-15.9-12.1-27.5-15-7.5-1.9-11.2-2-66.2-2h-58.3zm118.7 8.8c19.8 8.9 23.5 31.5 9.7 60-8.1 16.9-20.3 26.8-36.2 29.4-4.2.7-16.3 1.1-31.4.9l-24.6-.3 10.7-43.2c5.9-23.7 11.4-44.3 12.4-45.7.9-1.4 2.9-2.8 4.4-3.2 1.5-.3 3.2-.8 3.7-1 .6-.2 10.9-.2 23-.1 21.7.3 22.1.4 28.3 3.2m-25.7 103.3c7.2 2.9 13.1 8 16.1 14 3.4 6.9 3.2 22.8-.6 36.5-6.3 23.4-16 36.9-32.2 45-9.8 4.9-15.3 5.7-40.1 5.7-25.2 0-26.7-.3-26.6-5.6.1-2.3 22.1-92.4 23.8-97.2.4-1.1 5.6-1.3 27.3-1 24.7.4 27.1.6 32.3 2.6"></path>
+    </svg>
+  ),
+```
+
+Make sure you are only replacing the `<svg>` tag and not the `logo: (props: IconProps) => (` section. If the pasted svg is missing the `{...props}` section, make sure you add that as well.
+
+#### Favicon
+
+The Favicon is an image that sits in the tab your website is in within the browser. You should see another "dB" logo in the tab your `localhost:3000` instance is running in. To create a favicon, find an image you want to use and go to [Favicon.io](<https://favicon.io/>) and follow the steps there. To add the code they want you to paste into the site's head, paste it into `components/site-header.tsx`. Also replace all the icons and favicons in the `app/` directory with the ones from Favicon.io.
+
+If you are happy with the site at this point, skip to the Deployment section to learn how to publish the site. Otherwise, the next section will briefly cover further customization.
+
+## Step 6: Bonus Features
+
+If you need different social media links or want a different structure, I am not going to make a tutorial here, only a loose guide and some tips I found useful along the way.
+
+### More Social Media Links
+
+To add something like a Twitter or BlueSky link, you will need to add the link to `config/site.ts`, add an SVG logo to `components/icons.tsx`, and then add the links to the site header, mobile nav and main nav. To do this, navigate to `components/mobile-nav.tsx`. Here you should see how the other links are set up, and can follow their format to add your own links.
+
+### Removing Projects or Articles
+
+If you are not interested in using one of these velite collections or wish to add your own, simply add nothing to the `/content/[collection you are not using]` directory and replace any HTML in `app/projects(or articles)/[slug]/page.tsx` and `app/projects(or articles)/page.tsx` with `notFound()`. This will display a 404 page when a user tries to navigate to the page.
+
+Next, go to `components/main-nav.tsx` and remove the link to Projects or Articles, or add the collection you are adding in.
+
+## Step 7: Deployment
+
+Let's make sure the site is ready to go before deploying it. If you run the code `npm run build` and it builds with no errors, you are good to go! Otherwise, follow the error messages you provided, something got messed up along the way.
+
+For the deployment, I will be using Vercel.
