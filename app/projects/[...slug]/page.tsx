@@ -72,15 +72,19 @@ export default async function PostPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
+    <article
+      className="container py-6 prose dark:prose-invert prose-pre:max-w-full mx-auto
+        max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl
+        prose-pre:overflow-x-auto prose-pre:my-4 prose-code:text-base"
+    >
       <h1 className="mb-2">{project.title}</h1>
       <div className="flex gap-2 mb-2">
-        {project.tags?.map((tag) => (
-          <ProjectTag tag={tag} key={tag} />
-        ))}
+        {project.tags?.map((tag) => <ProjectTag tag={tag} key={tag} />)}
       </div>
       {project.description ? (
-        <p className="text-xl mt-0 text-muted-foreground">{project.description}</p>
+        <p className="text-xl mt-0 text-muted-foreground">
+          {project.description}
+        </p>
       ) : null}
       <hr className="my-4" />
       <MDXContent code={project.body} />

@@ -26,10 +26,8 @@ export function PostItem({
           <Link href={"/" + slug}>{title}</Link>
         </h2>
       </div>
-      <div className="flex gap-2">
-        {tags?.map((tag) => (
-          <PostTag tag={tag} key={tag} />
-        ))}
+      <div className="flex flex-wrap gap-2">
+        {tags?.map((tag) => <PostTag tag={tag} key={tag} />)}
       </div>
       <div className="max-w-none text-muted-foreground">{description}</div>
       <div className="flex justify-between items-center">

@@ -20,7 +20,8 @@ export function ProjectItem({
   description,
   date,
   tags,
-}: ProjectItemProps) { //add GH and Demo Links
+}: ProjectItemProps) {
+  //add GH and Demo Links
   return (
     <article className="flex flex-col gap-2 border-border border-b py-3">
       <div>
@@ -28,10 +29,8 @@ export function ProjectItem({
           <Link href={"/" + slug}>{title}</Link>
         </h2>
       </div>
-      <div className="flex gap-2">
-        {tags?.map((tag) => (
-          <Tag tag={tag} key={tag} />
-        ))}
+      <div className="flex flex-wrap gap-2">
+        {tags?.map((tag) => <Tag tag={tag} key={tag} />)}
       </div>
       <div className="max-w-none text-muted-foreground">{description}</div>
       <div className="flex justify-between items-center">
